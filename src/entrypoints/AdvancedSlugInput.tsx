@@ -8,7 +8,6 @@ import { SelectPrefix } from '../components/SelectPrefix';
 export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 	const [slugValue, setSlugValue] = useState(ctx.formValues[ctx.fieldPath] as string | undefined);
 	const [shouldKeepSynced, setShouldKeepSynced] = useState(true);
-	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const onInputChange = (value: string) => {
 		setShouldKeepSynced(false);
@@ -22,9 +21,8 @@ export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => 
 	const title = useSlugTitleValue(ctx);
 
 	useEffect(() => {
-		if (inputRef.current && shouldKeepSynced && title !== undefined) {
+		if (shouldKeepSynced && title !== undefined) {
 			const value = slugify(title || '');
-			inputRef.current.value = value;
 			setSlugValue(value);
 		}
 	}, [title, shouldKeepSynced]);
@@ -37,14 +35,7 @@ export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => 
 		<Canvas ctx={ctx}>
 			<div className='input-group input-group--small advancedSlugInput__row'>
 				<SelectPrefix ctx={ctx} />
-				<TextInput
-					name='slugValue'
-					id='slugValue'
-					autoComplete='false'
-					value={slugValue}
-					inputRef={inputRef}
-					onChange={onInputChange}
-				/>
+				<TextInput name='slugValue' id='slugValue' autoComplete='false' value={slugValue} onChange={onInputChange} />
 				<Button
 					disabled={shouldKeepSynced}
 					onClick={sync}
