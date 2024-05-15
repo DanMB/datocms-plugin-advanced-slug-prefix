@@ -1,21 +1,25 @@
 import type { RenderFieldExtensionCtx } from 'datocms-plugin-sdk';
 import { Button, Canvas, TextInput } from 'datocms-react-ui';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { slugify } from '../utils/slugify';
 import { useSlugTitleValue } from '../hooks/useSlugTitleValue';
 import { SelectPrefix } from '../components/SelectPrefix';
 
 export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 	const [slugValue, setSlugValue] = useState(ctx.formValues[ctx.fieldPath] as string | undefined);
-	const [shouldKeepSynced, setShouldKeepSynced] = useState(true);
+	const [shouldKeepSynced, setShouldKeepSynced] = useState(ctx.itemStatus === 'new');
 
-	const onInputChange = (value: string) => {
+	const keyDown = () => {
 		setShouldKeepSynced(false);
-		setSlugValue(value);
 	};
 
 	const sync = () => {
-		setShouldKeepSynced(true);
+		if (ctx.itemStatus === 'new') {
+			setShouldKeepSynced(true);
+		} else {
+			const value = slugify(title || '');
+			setSlugValue(value);
+		}
 	};
 
 	const title = useSlugTitleValue(ctx);
@@ -35,7 +39,14 @@ export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => 
 		<Canvas ctx={ctx}>
 			<div className='input-group input-group--small advancedSlugInput__row'>
 				<SelectPrefix ctx={ctx} />
-				<TextInput name='slugValue' id='slugValue' autoComplete='false' value={slugValue} onChange={onInputChange} />
+				<TextInput
+					name='slugValue'
+					id='slugValue'
+					autoComplete='false'
+					value={slugValue}
+					onChange={setSlugValue}
+					onKeyDown={keyDown}
+				/>
 				<Button
 					disabled={shouldKeepSynced}
 					onClick={sync}
