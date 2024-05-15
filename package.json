@@ -1,0 +1,37 @@
+{
+	"name": "datocms-plugin-advanced-slug-prefix",
+	"version": "0.0.1",
+	"author": "DanMB",
+	"homepage": "https://github.com/DanMB/datocms-plugin-advanced-slug-prefix",
+	"description": "Allow for advanced slug prefix selection in DatoCMS",
+	"keywords": [
+		"datocms-plugin"
+	],
+	"type": "module",
+	"datoCmsPlugin": {
+		"title": "Advanced slug prefix",
+		"entryPoint": "build/index.html",
+		"permissions": []
+	},
+	"files": [
+		"build"
+	],
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"prepublishOnly": "vite build"
+	},
+	"dependencies": {
+		"datocms-plugin-sdk": "^1.0.2",
+		"datocms-react-ui": "^1.0.2",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"devDependencies": {
+		"@types/react": "^18.3.2",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react": "^4.2.1",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.11"
+	}
+}

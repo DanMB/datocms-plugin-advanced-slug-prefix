@@ -1,0 +1,78 @@
+/* .hint {
+	color: var(--light-body-color);
+	line-height: 1.2;
+	font-size: var(--font-size-s);
+	margin-top: calc(-10px + var(--spacing-s));
+}
+
+.hint ul {
+	margin: 0;
+	padding: 0;
+}
+
+.hint li {
+	list-style-type: none;
+} */
+
+.advancedSlugInput__row {
+	display: flex;
+	flex-direction: row;
+}
+
+.advancedSlugInput__row button {
+	border-radius: 0;
+	font-size: var(--font-size-m);
+	background-color: var(--light-bg-color);
+}
+
+.advancedSlugInput__row button svg {
+	fill: var(--base-body-color);
+}
+
+.advancedSlugInput__row input {
+	font-size: var(--font-size-m);
+}
+
+.advancedSlugInput__row button:disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.advancedSlugInput__value-container {
+	padding: 10px !important;
+	padding-right: 4px !important;
+}
+
+.advancedSlugInput__parent {
+	flex: 1 0 auto !important;
+}
+
+.advancedSlugInput__control {
+	background-color: var(--light-bg-color) !important;
+	color: var(--base-body-color) !important;
+	cursor: pointer !important;
+}
+
+.advancedSlugInput__input-container {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.advancedSlugInput__indicator {
+	padding: 10px !important;
+	padding-left: 4px !important;
+}
+
+.advancedSlugInput__indicator svg {
+	height: 18px !important;
+	width: 18px !important;
+}
+
+.advancedSlugInput__indicator,
+.advancedSlugInput__indicator:hover {
+	color: var(--darker-border-color) !important;
+}
+
+.advancedSlugInput__indicator-separator {
+	display: none !important;
+}
