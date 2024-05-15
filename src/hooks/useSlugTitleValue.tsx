@@ -1,5 +1,5 @@
 import { Field, RenderFieldExtensionCtx } from 'datocms-plugin-sdk';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { getValue } from '../utils/getValue';
 
 export const useSlugTitleValue = (ctx: RenderFieldExtensionCtx) => {
@@ -16,5 +16,5 @@ export const useSlugTitleValue = (ctx: RenderFieldExtensionCtx) => {
 
 	const title = getValue(ctx, field.current);
 
-	return useMemo(() => title, [title]);
+	return title;
 };

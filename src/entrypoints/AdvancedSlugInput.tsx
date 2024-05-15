@@ -22,7 +22,7 @@ export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => 
 	const title = useSlugTitleValue(ctx);
 
 	useEffect(() => {
-		if (inputRef.current && shouldKeepSynced) {
+		if (inputRef.current && shouldKeepSynced && title !== undefined) {
 			const value = slugify(title || '');
 			inputRef.current.value = value;
 			setSlugValue(value);
@@ -41,7 +41,7 @@ export const AdvancedSlugInput = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => 
 					name='slugValue'
 					id='slugValue'
 					autoComplete='false'
-					defaultValue={slugValue}
+					value={slugValue}
 					inputRef={inputRef}
 					onChange={onInputChange}
 				/>
