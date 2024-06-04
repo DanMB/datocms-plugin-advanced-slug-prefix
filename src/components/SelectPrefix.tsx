@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { getValue } from '../utils/getValue';
 
 export const SelectPrefix = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
+	const [ready, setReady] = useState(false);
 	const [value, setValue] = useState<{ value: string; label: string } | undefined>();
 	const [prefixes, setPrefixes] = useState<{ value: string; label: string }[]>([]);
 	const field = useRef<Field | undefined>();
 
 	useEffect(() => {
 		const key = field.current?.attributes.api_key;
-		if (key) ctx.setFieldValue(key, value?.value);
+		if (ready && key) ctx.setFieldValue(key, value?.value);
 	}, [value]);
 
 	useEffect(() => {
@@ -34,7 +35,7 @@ export const SelectPrefix = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 			}
 
 			let value = getValue(ctx, field.current);
-			if (!value || prefixes.includes(value)) value = prefixes[0];
+			if (!value || !prefixes.includes(value)) value = prefixes[0];
 
 			setPrefixes(
 				prefixes.map(p => ({
@@ -46,18 +47,23 @@ export const SelectPrefix = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 				value,
 				label: value,
 			});
+			setReady(true);
 		});
 	}, []);
 
 	return (
 		<SelectInput
+			isDisabled={!ready}
+			isLoading={!ready}
 			className='input-group__addon advancedSlugInput__parent'
 			classNamePrefix={'advancedSlugInput'}
 			options={prefixes}
 			id={'prefixSelector'}
 			name={'prefixSelector'}
-			value={value}
+			placeholder={''}
+			value={ready ? value : undefined}
 			onChange={val => {
+				if (!ready) return;
 				if (val) {
 					setValue(val);
 				} else {
