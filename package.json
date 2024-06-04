@@ -1,6 +1,6 @@
 {
 	"name": "datocms-plugin-advanced-slug-prefix",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "DanMB",
 	"homepage": "https://github.com/DanMB/datocms-plugin-advanced-slug-prefix",
 	"description": "Allow for advanced slug prefix selection in DatoCMS",
